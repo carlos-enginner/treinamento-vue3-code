@@ -8,7 +8,9 @@
         </div>
 
         <div class="flex">
-            <button class="px-6 py-2 font-bold text-white focus:outline-none">
+            <button
+                @click="() => emit('create-account')"
+                class="px-6 py-2 font-bold text-white focus:outline-none">
                 Crie uma conta
             </button>
             <button
@@ -30,7 +32,9 @@
             simples widget na página.
         </p>
         <div>
-            <button class="px-6 py-2 mt-10 font-bold bg-white rounded-full text-brand-main focus:outline-none">
+            <button
+            @click="() => emit('login')"
+            class="px-6 py-2 mt-10 font-bold bg-white rounded-full text-brand-main focus:outline-none">
                 Crie uma conta grátis
             </button>
         </div>

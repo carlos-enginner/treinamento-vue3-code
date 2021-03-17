@@ -7,6 +7,7 @@
         >
             <div class="fixed mx-10"
                 :class="state.width"
+                @click.stop
             >
                 <div class="flex flex-col overflow-hidden bg-white rounded-lg animate__animated animate__fadeInDown animate__faster">
                     <div class="flex flex-col px-12 py-10 bg-white">
@@ -20,17 +21,19 @@
 
 <script>
 
-import { reactive, onMounted, onBeforeMount, defineAsyncComponent } from 'vue'
+import { reactive, onMounted, onBeforeUnmount, defineAsyncComponent } from 'vue'
 import useModal from '../../hooks/useModal'
 
 const ModalLogin = defineAsyncComponent(() => import('../ModalLogin'))
+const ModalCreateAccount = defineAsyncComponent(() => import('../ModalCreateAccount'))
 
 const DEFAULT_WIDTH = 'w-3-4 lg:w-1/3'
 
 export default {
 
   components: {
-    ModalLogin
+    ModalLogin,
+    ModalCreateAccount
   },
 
   setup () {
@@ -46,7 +49,7 @@ export default {
       modal.listen(handlerModalToogle)
     })
 
-    onBeforeMount(() => {
+    onBeforeUnmount(() => {
       modal.off(handlerModalToogle)
     })
 
@@ -60,6 +63,8 @@ export default {
         state.props = {}
         state.with = DEFAULT_WIDTH
       }
+
+      state.isActive = payload.status
     }
 
     return {
